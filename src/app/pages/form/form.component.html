@@ -1,0 +1,54 @@
+<div class="container">
+    <div class="row text-center">
+        <div class="title">
+            <div *ngIf="headerType">
+                <h1 class="statusCode">{{headerType.statusCode}}</h1>
+            </div>
+        </div>
+    </div>
+    <form method="POST" #f="ngForm" (submit)="addUrl(f)">
+        <div class="form-group">
+            <label for="row">Inerisci url</label>
+            <div class="row" id="row">
+                <select name="method" required [ngModel]="method">
+                    <option name="GET">GET</option>
+                    <option name="POST">POST</option>
+                    <option name="PUT">PUT</option>
+                    <option name="DELETE">DELETE</option>
+                </select>
+                <input type="url" name="url" class="form-control" required [(ngModel)]="binding">
+                <button type="submit" [disabled]="f.isvalid">INVIA</button>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="card" *ngIf="headerType">
+    <div class="card-body">
+        <h4 class="card-title">URL INFO</h4>
+        <div class="card-text">
+            DOMAIN
+            <label> {{headerType.url}}</label>
+        </div>
+        <div class="card-text">
+            SCHEME
+            <p>HTTP</p>
+        </div>
+        <div class="card-text">
+           PATH
+            <p> {{headerType.path}}</p>
+        </div>
+    </div>
+        <div class="card-body">
+            <h4 class="card-title">Response</h4>
+            <div class="card-text-headers">
+                <label>HTTP {{headerType.statusCode}} {{headerType.ok}}</label>
+            </div>
+            <div class="card-text-headers">
+                <label> {{headerType.respHeader1}}</label>
+            </div>
+            <div class="card-text-headers">
+                <label> {{headerType.respHeader2}}</label>
+            </div>
+
+        </div>
+</div>
